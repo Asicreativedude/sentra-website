@@ -1,3 +1,38 @@
+//testimonials swiperjs
+var swiper = new Swiper('.swiper', {
+	speed: 500,
+	loop: true,
+	autoplay: {
+		delay: 5000,
+	},
+	effect: 'fade',
+	fadeEffect: {
+		crossFade: true,
+	},
+	navigation: {
+		nextEl: '.swiper-button-next',
+		prevEl: '.swiper-button-prev',
+	},
+	pagination: {
+		el: '.swiper-pagination',
+		type: 'bullets',
+	},
+});
+
+swiper.on('slideChange', () => {
+	let activeSlide =
+		document.querySelectorAll('.swiper-slide')[swiper.activeIndex];
+	let companyNameText = document.querySelectorAll('.testimonial-company-name');
+	for (let i = 0; i < companyNameText.length; i++) {
+		companyNameText[i].style.opacity = 0.2;
+		setTimeout(() => {
+			companyNameText[i].innerHTML = activeSlide.getAttribute('company-name');
+			companyNameText[i].style.opacity = 1;
+		}, 200);
+	}
+});
+
+//mobile tabs
 const accSettings = {
 	speed: 300, // Animation speed
 	oneOpen: true, // Close all other accordion items if true
