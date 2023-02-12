@@ -46,6 +46,7 @@ const accSettings = {
 		item: 'tab-content-c',
 		body: 'tab-content-w',
 		icon: 'tab-plus-icon',
+		iconOpen: 'tab-minus-icon',
 		active: 'active',
 	},
 };
@@ -58,6 +59,7 @@ const accordion = (function () {
 	const accordionItem = $(`.${prefix.item}`);
 	const accordionBody = $(`.${prefix.body}`);
 	const accordionIcon = $(`.${prefix.icon}`);
+	const accordionIconOpen = $(`.${prefix.iconOpen}`);
 	const activeClass = prefix.active;
 
 	return {
@@ -76,7 +78,6 @@ const accordion = (function () {
 			});
 
 			$.extend(accSettings, settings);
-
 			// ensure only one accordion is active if oneOpen is true
 			if (settings.oneOpen && $(`.${prefix.item}.${activeClass}`).length > 1) {
 				$(`.${prefix.item}.${activeClass}:not(:first)`)
@@ -107,8 +108,39 @@ const accordion = (function () {
 					.find(`> .${prefix.item}`)
 					.find(`> .${prefix.header} > .${prefix.icon}`)
 					.removeClass(activeClass);
-			}
 
+				$this.find(accordionIconOpen).toggleClass(activeClass);
+				$this.find(accordionIcon).toggleClass(activeClass);
+			}
+			let icons = $this
+				.closest(accordionItem)
+				.siblings()
+				.find(accordionIconOpen);
+
+			for (let i = 0; i < icons.length; i++) {
+				if (icons[i].classList.contains(activeClass)) {
+					icons[i].classList.toggle(activeClass);
+					icons[i].nextElementSibling.classList.toggle(activeClass);
+				}
+			}
+			if (
+				$this
+					.closest(accordionItem)
+					.siblings()
+					.find(accordionIconOpen)
+					.hasClass(activeClass)
+			) {
+				$this
+					.closest(accordionItem)
+					.siblings()
+					.find(accordionIconOpen)
+					.toggleClass(activeClass);
+				$this
+					.closest(accordionItem)
+					.siblings()
+					.find(accordionIcon)
+					.toggleClass(activeClass);
+			}
 			// show/hide the clicked accordion item
 			$this
 				.closest(accordionItem)
@@ -125,3 +157,21 @@ $(document).ready(function () {
 });
 
 document.querySelectorAll('.tab-link')[0].click();
+
+// let tabs = document.querySelectorAll('.tab-link');
+// tabs.forEach((tab) => {
+// 	tab.addEventListener('click', function () {
+// 		let pluses = document.querySelectorAll('.tab-plus-icon');
+// 		let minuses = document.querySelectorAll('.tab-minus-icon');
+// 		pluses.forEach((plus) => {
+// 			if (tab.classList.contains('active')) {
+// 				plus.classList.toggle('active');
+// 			}
+// 		});
+// 		minuses.forEach((minus) => {
+// 			if (tab.classList.contains('active')) {
+// 				minus.classList.toggle('active');
+// 			}
+// 		});
+// 	});
+// });
