@@ -164,17 +164,3 @@ let lastFrame = document.querySelector('.homepagevid-lastframe');
 video.addEventListener('ended', () => {
 	lastFrame.style.display = 'block';
 });
-
-// resources tags text color
-
-let tags = document.querySelectorAll('.homepage-resource-tag');
-for (const tag of tags) {
-	console.log(tag.style.backgroundColor);
-	if (
-		tag.style.backgroundColor == 'rgb(23, 184, 144)' ||
-		tag.style.backgroundColor == 'rgb(65, 191, 232)' ||
-		tag.style.backgroundColor == 'rgb(245, 233, 96)'
-	) {
-		tag.children[0].classList.remove('white-text');
-	}
-}
