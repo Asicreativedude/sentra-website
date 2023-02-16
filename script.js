@@ -24,11 +24,11 @@ swiper.on('slideChange', () => {
 		document.querySelectorAll('.swiper-slide')[swiper.activeIndex];
 	let companyNameText = document.querySelectorAll('.testimonial-company-name');
 	for (let i = 0; i < companyNameText.length; i++) {
-		companyNameText[i].style.opacity = 0.2;
+		companyNameText[i].style.opacity = 0.1;
 		setTimeout(() => {
 			companyNameText[i].innerHTML = activeSlide.getAttribute('company-name');
 			companyNameText[i].style.opacity = 1;
-		}, 200);
+		}, 400);
 	}
 });
 
@@ -158,20 +158,23 @@ $(document).ready(function () {
 
 document.querySelectorAll('.tab-link')[0].click();
 
-// let tabs = document.querySelectorAll('.tab-link');
-// tabs.forEach((tab) => {
-// 	tab.addEventListener('click', function () {
-// 		let pluses = document.querySelectorAll('.tab-plus-icon');
-// 		let minuses = document.querySelectorAll('.tab-minus-icon');
-// 		pluses.forEach((plus) => {
-// 			if (tab.classList.contains('active')) {
-// 				plus.classList.toggle('active');
-// 			}
-// 		});
-// 		minuses.forEach((minus) => {
-// 			if (tab.classList.contains('active')) {
-// 				minus.classList.toggle('active');
-// 			}
-// 		});
-// 	});
-// });
+//homepage video last frame
+let video = document.querySelector('.homepageVid');
+let lastFrame = document.querySelector('.homepagevid-lastframe');
+video.addEventListener('ended', () => {
+	lastFrame.style.display = 'block';
+});
+
+// resources tags text color
+
+let tags = document.querySelectorAll('.homepage-resource-tag');
+for (const tag of tags) {
+	console.log(tag.style.backgroundColor);
+	if (
+		tag.style.backgroundColor == 'rgb(23, 184, 144)' ||
+		tag.style.backgroundColor == 'rgb(65, 191, 232)' ||
+		tag.style.backgroundColor == 'rgb(245, 233, 96)'
+	) {
+		tag.children[0].classList.remove('white-text');
+	}
+}
