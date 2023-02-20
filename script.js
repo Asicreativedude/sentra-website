@@ -41,7 +41,7 @@ const accSettings = {
 	scrollTopDelay: 400, // In Milliseconds – Delay before scroll to top
 
 	classes: {
-		accordion: 'tabs-mobile-w',
+		accordion: 'tabs-w',
 		header: 'tab-link',
 		item: 'tab-content-c',
 		body: 'tab-content-w',
