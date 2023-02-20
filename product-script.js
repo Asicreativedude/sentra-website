@@ -1,38 +1,3 @@
-//testimonials swiperjs
-var swiper = new Swiper('.swiper', {
-	speed: 500,
-	loop: true,
-	autoplay: {
-		delay: 5000,
-	},
-	effect: 'fade',
-	fadeEffect: {
-		crossFade: true,
-	},
-	navigation: {
-		nextEl: '.swiper-button-next',
-		prevEl: '.swiper-button-prev',
-	},
-	pagination: {
-		el: '.swiper-pagination',
-		type: 'bullets',
-	},
-});
-
-swiper.on('slideChange', () => {
-	let activeSlide =
-		document.querySelectorAll('.swiper-slide')[swiper.activeIndex];
-	let companyNameText = document.querySelectorAll('.testimonial-company-name');
-	for (let i = 0; i < companyNameText.length; i++) {
-		companyNameText[i].style.opacity = 0.1;
-		setTimeout(() => {
-			companyNameText[i].innerHTML = activeSlide.getAttribute('company-name');
-			companyNameText[i].style.opacity = 1;
-		}, 400);
-	}
-});
-
-//mobile tabs
 const accSettings = {
 	speed: 300, // Animation speed
 	oneOpen: true, // Close all other accordion items if true
@@ -47,6 +12,7 @@ const accSettings = {
 		body: 'tab-content-w',
 		icon: 'tab-plus-icon',
 		iconOpen: 'tab-minus-icon',
+		image: 'tab-dropdown-img',
 		active: 'active',
 	},
 };
@@ -60,6 +26,7 @@ const accordion = (function () {
 	const accordionBody = $(`.${prefix.body}`);
 	const accordionIcon = $(`.${prefix.icon}`);
 	const accordionIconOpen = $(`.${prefix.iconOpen}`);
+	const accordionImage = $(`.${prefix.image}`);
 	const activeClass = prefix.active;
 
 	return {
@@ -67,7 +34,7 @@ const accordion = (function () {
 		init: function (settings) {
 			accordionHeader.on('click', function () {
 				accordion.toggle($(this));
-				if (accSettings.offsetAnchor) {
+				if (accSettings.offsetAnchor && window.innerWidth < 991) {
 					setTimeout(() => {
 						$('html').animate(
 							{ scrollTop: $(this).offset().top - accSettings.offsetFromTop },
@@ -123,6 +90,12 @@ const accordion = (function () {
 					icons[i].nextElementSibling.classList.toggle(activeClass);
 				}
 			}
+			let images = $this.closest(accordionItem).siblings().find(accordionImage);
+			for (let j = 0; j < images.length; j++) {
+				if (images[j].classList.contains(activeClass)) {
+					images[j].classList.toggle(activeClass);
+				}
+			}
 			if (
 				$this
 					.closest(accordionItem)
@@ -141,6 +114,7 @@ const accordion = (function () {
 					.find(accordionIcon)
 					.toggleClass(activeClass);
 			}
+
 			// show/hide the clicked accordion item
 			$this
 				.closest(accordionItem)
@@ -148,6 +122,11 @@ const accordion = (function () {
 				.find(`> .${prefix.header} > .${prefix.icon}`)
 				.toggleClass(activeClass);
 			$this.next().stop().slideToggle(accSettings.speed);
+			$this
+				.closest(accordionItem)
+				.find(accordionBody)
+				.find(accordionImage)
+				.toggleClass(activeClass);
 		},
 	};
 })();
@@ -157,24 +136,3 @@ $(document).ready(function () {
 });
 
 document.querySelectorAll('.tab-link')[0].click();
-
-//homepage video last frame
-let video = document.querySelector('.homepageVid');
-let lastFrame = document.querySelector('.homepagevid-lastframe');
-video.addEventListener('ended', () => {
-	lastFrame.style.display = 'block';
-});
-
-// resources tags text color
-
-let tags = document.querySelectorAll('.homepage-resource-tag');
-for (const tag of tags) {
-	console.log(tag.style.backgroundColor);
-	if (
-		tag.style.backgroundColor == 'rgb(23, 184, 144)' ||
-		tag.style.backgroundColor == 'rgb(65, 191, 232)' ||
-		tag.style.backgroundColor == 'rgb(245, 233, 96)'
-	) {
-		tag.children[0].classList.remove('white-text');
-	}
-}
