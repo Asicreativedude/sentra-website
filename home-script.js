@@ -152,6 +152,12 @@ const accordion = (function () {
 	};
 })();
 
+if (window.innerWidth < 991) {
+	let heroVideo = document.querySelector('.homepageVid');
+	let lastFrame = document.querySelector('.homepagevid-lastframe');
+	heroVideo.remove();
+	lastFrame.remove();
+}
 $(document).ready(function () {
 	accordion.init(accSettings);
 });
