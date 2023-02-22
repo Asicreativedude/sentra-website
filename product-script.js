@@ -128,6 +128,10 @@ const accordion = (function () {
 				.find(accordionBody)
 				.find(accordionImage)
 				.toggleClass(activeClass);
+			$this
+				.closest(accordionItem)
+				.find(accordionHeader)
+				.toggleClass(activeClass);
 			defaultImage.classList.remove(activeClass);
 
 			if (!$this.closest(accordionItem).hasClass(activeClass)) {
