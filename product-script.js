@@ -127,6 +127,16 @@ const accordion = (function () {
 				.find(accordionBody)
 				.find(accordionImage)
 				.toggleClass(activeClass);
+			if (!$this.closest(accordionItem).hasClass(activeClass)) {
+				$this
+					.closest(accordionItem)
+					.find(accordionIconOpen)
+					.toggleClass(activeClass);
+				$this
+					.closest(accordionItem)
+					.find(accordionIcon)
+					.toggleClass(activeClass);
+			}
 		},
 	};
 })();

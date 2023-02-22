@@ -148,6 +148,16 @@ const accordion = (function () {
 				.find(`> .${prefix.header} > .${prefix.icon}`)
 				.toggleClass(activeClass);
 			$this.next().stop().slideToggle(accSettings.speed);
+			if (!$this.closest(accordionItem).hasClass(activeClass)) {
+				$this
+					.closest(accordionItem)
+					.find(accordionIconOpen)
+					.toggleClass(activeClass);
+				$this
+					.closest(accordionItem)
+					.find(accordionIcon)
+					.toggleClass(activeClass);
+			}
 		},
 	};
 })();
@@ -163,10 +173,11 @@ $(document).ready(function () {
 });
 
 document.querySelectorAll('.tab-link')[0].click();
-
-//homepage video last frame
-let video = document.querySelector('.homepageVid');
-let lastFrame = document.querySelector('.homepagevid-lastframe');
-video.addEventListener('ended', () => {
-	lastFrame.style.display = 'block';
-});
+if (window.innerWidth > 991) {
+	//homepage video last frame
+	let video = document.querySelector('.homepageVid');
+	let lastFrame = document.querySelector('.homepagevid-lastframe');
+	video.addEventListener('ended', () => {
+		lastFrame.style.display = 'block';
+	});
+}
