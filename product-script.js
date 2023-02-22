@@ -1,3 +1,4 @@
+const defaultImage = document.querySelector('.tab-dropdown-img-default');
 const accSettings = {
 	speed: 300, // Animation speed
 	oneOpen: true, // Close all other accordion items if true
@@ -127,6 +128,8 @@ const accordion = (function () {
 				.find(accordionBody)
 				.find(accordionImage)
 				.toggleClass(activeClass);
+			defaultImage.classList.remove(activeClass);
+
 			if (!$this.closest(accordionItem).hasClass(activeClass)) {
 				$this
 					.closest(accordionItem)
@@ -136,6 +139,7 @@ const accordion = (function () {
 					.closest(accordionItem)
 					.find(accordionIcon)
 					.toggleClass(activeClass);
+				defaultImage.classList.add(activeClass);
 			}
 		},
 	};
