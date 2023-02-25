@@ -85,3 +85,20 @@ closeBtn.forEach((i) => {
 		});
 	});
 });
+//add all filter to categories
+let categories = document.querySelector('.filters-categories');
+
+let allCategories = document.createElement('label');
+allCategories.classList.add('filter-button-w');
+allCategories.classList.add('reset-filter');
+allCategories.classList.add('w-radio');
+allCategories.setAttribute('fs-cmsfilter-active', 'active-filter');
+allCategories.setAttribute('fs-cmsfilter-element', 'reset');
+allCategories.innerHTML = `<input type="radio" id="radio" name="Radio" value="Radio" data-name="Radio" checked="" class="w-form-formradioinput filter-radio-buttons w-radio-input"><span class="filter-button-text w-form-label" for="radio">All</span>`;
+
+let newItem = document.createElement('div');
+newItem.setAttribute('role', 'listitem');
+newItem.classList.add('w-dyn-item');
+
+categories.prepend(newItem);
+newItem.appendChild(allCategories);
