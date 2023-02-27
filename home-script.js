@@ -167,6 +167,7 @@ $(document).ready(function () {
 });
 
 document.querySelectorAll('.tab-link')[0].click();
+
 if (window.innerWidth > 991) {
 	//homepage video last frame
 	let video = document.querySelector('.homepageVid');

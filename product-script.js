@@ -1,3 +1,5 @@
+const tabsSection = document.querySelector('.product-page-posture-s');
+
 const defaultImage = document.querySelector('.tab-dropdown-img-default');
 const accSettings = {
 	speed: 300, // Animation speed
@@ -133,6 +135,7 @@ const accordion = (function () {
 				.find(accordionHeader)
 				.toggleClass(activeClass);
 			defaultImage.classList.remove(activeClass);
+			tabsSection.classList.remove(activeClass);
 
 			if (!$this.closest(accordionItem).hasClass(activeClass)) {
 				$this
@@ -144,6 +147,7 @@ const accordion = (function () {
 					.find(accordionIcon)
 					.toggleClass(activeClass);
 				defaultImage.classList.add(activeClass);
+				tabsSection.classList.add(activeClass);
 			}
 		},
 	};
