@@ -58,33 +58,46 @@ const player = Plyr.setup('#player', {
 	],
 });
 
-// Register IntersectionObserver
-const io = new IntersectionObserver((entries) => {
-	entries.forEach((entry) => {
-		if (entry.intersectionRatio > 0 && entry.target.style.display != 'none') {
-			// Add 'active' class if observation target is inside viewport
-			header.style.zIndex = '84';
-		} else {
-			// Remove 'active' class otherwise
-			header.style.zIndex = '1000';
-		}
-	});
-});
+// // Register IntersectionObserver
+// const io = new IntersectionObserver((entries) => {
+// 	entries.forEach((entry) => {
+// 		let parentElement = entry.target.parentElement;
+// 		if (entry.intersectionRatio > 0 && entry.target.style.display != 'none') {
+// 			// Add 'active' class if observation target is inside viewport
+// 			document.body.appendChild(entry.target);
+// 		} else {
+// 			// Remove 'active' class otherwise
+// 			parentElement.appendChild(entry.target);
+// 		}
+// 	});
+// });
 
-// Declares what to observe, and observes its properties.
-const videos = document.querySelectorAll('.video-popup-c');
-videos.forEach((el) => {
-	io.observe(el);
-});
+// // Declares what to observe, and observes its properties.
+// const videos = document.querySelectorAll('.video-popup-c');
+// videos.forEach((el) => {
+// 	io.observe(el);
+// 	console.log(el);
+// });
 
-let closeBtn = document.querySelectorAll('.video-popup-close-btn');
-closeBtn.forEach((i) => {
+let popupTrigger = document.querySelectorAll('[cd-popup=trigger]');
+
+popupTrigger.forEach((i) => {
 	i.addEventListener('click', () => {
-		player.forEach((e) => {
-			e.pause();
+		console.log(i);
+		let currentPopup = i.querySelector(`.video-popup-c`);
+		currentPopup.classList.add('active');
+		document.body.appendChild(currentPopup);
+		let closeBtn = currentPopup.querySelector('.video-popup-close-btn');
+		closeBtn.addEventListener('click', () => {
+			player.forEach((e) => {
+				e.pause();
+				currentPopup.classList.remove('active');
+				i.appendChild(currentPopup);
+			});
 		});
 	});
 });
+
 //add all filter to categories
 let categories = document.querySelector('.filters-categories');
 
