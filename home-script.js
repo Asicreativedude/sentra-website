@@ -168,11 +168,13 @@ $(document).ready(function () {
 
 document.querySelectorAll('.tab-link')[0].click();
 
-if (window.innerWidth > 991) {
-	//homepage video last frame
-	let video = document.querySelector('.homepageVid');
-	let lastFrame = document.querySelector('.homepagevid-lastframe');
-	video.addEventListener('ended', () => {
-		lastFrame.style.display = 'block';
-	});
-}
+//homepage video
+
+// if (window.innerWidth > 991) {
+// 	//homepage video last frame
+// 	let video = document.querySelector('.homepageVid');
+// 	let lastFrame = document.querySelector('.homepagevid-lastframe');
+// 	video.addEventListener('ended', () => {
+// 		lastFrame.style.display = 'block';
+// 	});
+// }
