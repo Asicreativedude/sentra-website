@@ -15,14 +15,20 @@ let imagesWrapper = document.querySelectorAll(
 	'.career-images-collection > .employee-pictures-w > .w-dyn-item'
 );
 
+function randomlyAddDashClassToCircle(circle) {
+	let random = Math.floor(Math.random() * 5);
+	if (random === 1) {
+		circle.classList.add('dashed-circle');
+	}
+}
+
 function addCircleBetweenEveryOtherImage() {
 	let colors = ['red', 'black', 'yellow', 'purple'];
 	imagesWrapper.forEach((image, index) => {
 		let circle = newListItem.cloneNode(true);
+		randomlyAddDashClassToCircle(circle.children[0]);
 		let circleColor = colors[index % colors.length];
-
 		circle.children[0].classList.add(circleColor);
-		console.log(circle.children[0].classList);
 		for (let i = 0; i < imageLists.length; i++) {
 			if (imageLists[i].contains(image)) {
 				imageLists[i].insertBefore(circle, image);

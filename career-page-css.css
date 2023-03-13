@@ -55,12 +55,11 @@
 		rgba(255, 178, 54, 0) 99.78%
 	);
 }
-.carousel-circle::before {
+.dashed-circle::before {
 	content: '';
 	position: absolute;
 	right: 1.5rem;
-	width: 0rem;
-	opacity: 0;
+	width: 7.1rem;
 	height: 2.6rem;
 	filter: blur(4.49286px);
 	/* animation: circleTrail 1.15s infinite ease-in; */
