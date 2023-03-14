@@ -43,7 +43,7 @@ for (const tag of tags) {
 	}
 }
 
-const player = Plyr.setup('#player', {
+const player = Plyr.setup('.player', {
 	controls: [
 		'play-large',
 		'play',
@@ -58,46 +58,56 @@ const player = Plyr.setup('#player', {
 	],
 });
 
-// // Register IntersectionObserver
-// const io = new IntersectionObserver((entries) => {
-// 	entries.forEach((entry) => {
-// 		let parentElement = entry.target.parentElement;
-// 		if (entry.intersectionRatio > 0 && entry.target.style.display != 'none') {
-// 			// Add 'active' class if observation target is inside viewport
-// 			document.body.appendChild(entry.target);
-// 		} else {
-// 			// Remove 'active' class otherwise
-// 			parentElement.appendChild(entry.target);
-// 		}
-// 	});
-// });
-
-// // Declares what to observe, and observes its properties.
-// const videos = document.querySelectorAll('.video-popup-c');
-// videos.forEach((el) => {
-// 	io.observe(el);
-// 	console.log(el);
-// });
+const url = window.location.href;
+const urlSearchParams = new URLSearchParams(window.location.search);
+const params = Object.fromEntries(urlSearchParams.entries());
 
 let popupTrigger = document.querySelectorAll('[cd-popup=trigger]');
 
 popupTrigger.forEach((i) => {
 	i.addEventListener('click', () => {
-		console.log(i);
 		let currentPopup = i.querySelector(`.video-popup-c`);
 		currentPopup.classList.add('active');
 		document.body.appendChild(currentPopup);
+		params.name = currentPopup.querySelector('.player').getAttribute('id');
+		window.history.pushState({}, '', url + '?name=' + params.name);
 		let closeBtn = currentPopup.querySelector('.video-popup-close-btn');
 		closeBtn.addEventListener('click', () => {
 			player.forEach((e) => {
 				e.pause();
 				currentPopup.classList.remove('active');
 				i.appendChild(currentPopup);
+				window.history.pushState({}, '', url.split('?')[0]);
 			});
 		});
 	});
 });
 
+const modals = document.querySelectorAll('.video-popup-c');
+modals.forEach((modal, idx) => {
+	let video = modal.querySelector('.player');
+	openModalOnLoad(modal, idx);
+});
+
+function openModalOnLoad(modal, idx) {
+	const target = modal.querySelector('.player').getAttribute('id');
+
+	if (params.name == target) {
+		modal.classList.add('active');
+		document.body.appendChild(modal);
+		let closeBtn = modal.querySelector('.video-popup-close-btn');
+		closeBtn.addEventListener('click', () => {
+			player.forEach((e) => {
+				e.pause();
+				modal.classList.remove('active');
+				modal.parentNode.appendChild(modal);
+				window.history.pushState({}, '', url.split('?')[0]);
+			});
+		});
+	} else {
+		return;
+	}
+}
 //add all filter to categories
 // let categories = document.querySelector('.filters-categories');
 
