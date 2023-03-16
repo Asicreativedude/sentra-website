@@ -296,16 +296,28 @@
 	}
 }
 
-/* .employee-picture-c {
-	will-change: transform;
-	animation: marquee-horizontal-alt 30s infinite;
-} */
 .career-marquee-track {
 	position: absolute;
 	white-space: nowrap;
 	will-change: transform;
 	animation: marquee-horizontal-alt 120s linear infinite;
 }
+
+@keyframes marquee-horizontal-alt {
+	from {
+		transform: translateX(-50%);
+	}
+	to {
+		transform: translateX(0%);
+	}
+}
+
+/* advanced animations for later */
+/* .employee-picture-c {
+	will-change: transform;
+	animation: marquee-horizontal-alt 30s infinite;
+} */
+
 /* @keyframes marquee-horizontal-alt {
 	0% {
 		transform: translateX(0rem);
@@ -469,12 +481,3 @@
 		transform: translateX(224rem);
 	}
 } */
-
-@keyframes marquee-horizontal-alt {
-	from {
-		transform: translateX(-50%);
-	}
-	to {
-		transform: translateX(0%);
-	}
-}
