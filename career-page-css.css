@@ -300,7 +300,7 @@
 	position: absolute;
 	white-space: nowrap;
 	will-change: transform;
-	animation: marquee-horizontal-alt 140s linear infinite;
+	animation: marquee-horizontal-alt 180s linear infinite;
 }
 
 @keyframes marquee-horizontal-alt {
