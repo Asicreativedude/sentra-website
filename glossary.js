@@ -1,67 +1,67 @@
-let c = new Set();
-const a = new Event('mouseover');
-window.fsAttributes = window.fsAttributes || [];
-window.fsAttributes.push([
-	'cmsload',
-	(o) => {
-		console.log('cmsload Successfully loaded!');
-		const [l] = o;
-		l.renderingQueue
-			.then(async () => {
-				const e = document.querySelectorAll('.glossary-item');
-				await u(e);
-				let t = document.querySelectorAll('.letter-anchor-link'),
-					n = document.querySelectorAll('.glossary-letter');
-				function i() {
-					for (let s = 0; s < t.length; s++)
-						for (let r = 0; r < n.length; r++)
-							n[r].textContent == t[s].textContent &&
-								!n[r].classList.contains('w-condition-invisible') &&
-								t[s].classList.remove('disabled-link');
-				}
-				i(),
-					document
-						.querySelector('.glossary-lobby-box')
-						.addEventListener('mouseenter', () => {
-							document.querySelector('.right-arrow-link').dispatchEvent(a);
-						});
-			})
-			.catch((e) => {
-				console.error(e);
-			});
-	},
-]);
-function d(o) {
-	console.log(o);
-	let l = document.createElement('div');
-	l.classList.add('letter-tube-c');
-	let e = document.createElement('h2');
-	e.classList.add('glossary-letter'), (e.textContent = o);
-	let t = document.createElement('img');
-	(t.src =
+function d(e) {
+	console.log(e);
+	let t = document.createElement('div');
+	t.classList.add('letter-tube-c');
+	let l = document.createElement('h2');
+	l.classList.add('glossary-letter'), (l.textContent = e);
+	let n = document.createElement('img');
+	(n.src =
 		'https://assets-global.website-files.com/63e21dce115cee384ab9eeca/63e369b9575098fd89563f86_builtFor-pipe.svg'),
-		(t.loading = 'lazy'),
-		(t.alt = 'decorative-pipe'),
-		t.classList.add('letter-pipe-img'),
-		l.appendChild(t);
-	let n = document.createElement('div');
+		(n.loading = 'lazy'),
+		(n.alt = 'decorative-pipe'),
+		n.classList.add('letter-pipe-img'),
+		t.appendChild(n);
+	let o = document.createElement('div');
 	return (
-		(n.id = o),
-		n.classList.add('letter-anchor-embed'),
-		e.appendChild(n),
-		l.appendChild(e),
-		l
+		(o.id = e),
+		o.classList.add('letter-anchor-embed'),
+		l.appendChild(o),
+		t.appendChild(l),
+		t
 	);
 }
-async function u(o) {
-	o.forEach((l) => {
-		let e = l.getAttribute('title');
-		if ((console.log(e), e && e.length > 0)) {
-			let t = e[0].toUpperCase();
-			if (!c.has(t)) {
-				const n = d(t);
-				l.prepend(n), c.add(t);
+async function u(e) {
+	e.forEach((e) => {
+		let t = e.getAttribute('title');
+		if ((console.log(t), t && t.length > 0)) {
+			let l = t[0].toUpperCase();
+			if (!c.has(l)) {
+				const t = d(l);
+				e.prepend(t), c.add(l);
 			}
 		}
 	});
 }
+let c = new Set();
+const a = new Event('mouseover');
+(window.fsAttributes = window.fsAttributes || []),
+	window.fsAttributes.push([
+		'cmsload',
+		(e) => {
+			console.log('cmsload Successfully loaded!');
+			const [t] = e;
+			t.renderingQueue
+				.then(async () => {
+					function e() {
+						for (let e = 0; e < l.length; e++)
+							for (let t = 0; t < n.length; t++)
+								n[t].textContent == l[e].textContent &&
+									!n[t].classList.contains('w-condition-invisible') &&
+									l[e].classList.remove('disabled-link');
+					}
+					const t = document.querySelectorAll('.glossary-item');
+					await u(t);
+					let l = document.querySelectorAll('.letter-anchor-link'),
+						n = document.querySelectorAll('.glossary-letter');
+					e(),
+						document
+							.querySelector('.glossary-lobby-box')
+							.addEventListener('mouseenter', () => {
+								document.querySelector('.right-arrow-link').dispatchEvent(a);
+							});
+				})
+				.catch((e) => {
+					console.error(e);
+				});
+		},
+	]);
